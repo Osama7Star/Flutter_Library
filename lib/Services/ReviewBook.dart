@@ -30,6 +30,7 @@ class ReviewBook {
     );
   }
 
+}
   Future<List<ReviewBook>> getReview(http.Client client,String url) async {
     final response =
     await client.get(url);
@@ -45,4 +46,3 @@ class ReviewBook {
     return parsed.map<ReviewBook>((json) => ReviewBook.fromJson(json)).toList();
   }
 
-}

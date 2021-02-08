@@ -1,28 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_library/Services/CategoryModel.dart';
 
 import '../../utilites.dart';
 class Category extends StatelessWidget {
+  final List<CategoryModel> categories;
+
+  const Category({Key key, this.categories}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Container(
-            child: SizedBox(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  category(name:'Scince'),
-                  category(name:'Scince'),
-                  category(name:'Scince'),
-                  category(name:'Scince'),
-                  category(name:'Scince'),
+    return GestureDetector(
+
+      child: Container(
+
+          child:SizedBox(
+            height: 300,
+            width: 500,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: (){
+                    print(categories[index].id);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                         // builder: (context) => book(id:photos[index].id),
+                        ));
+                  },
+                  // onTap: widget.function,
+                  child: Card(
 
 
-                ]
-              ),
+                    elevation: 10,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+               child: category(name:'test'),
+                    ),
+                  ),
+                  ),
+                );
+              },
+
             ),
-          ),
+          )
       ),
     );
   }

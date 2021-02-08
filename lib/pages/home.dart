@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_library/Services/BookModel.dart';
+import 'package:flutter_library/Services/CategoryModel.dart';
 import 'package:flutter_library/pages/widgets/bookcard.dart';
 import 'package:http/http.dart' as http;
 
 import '../main.dart';
 import '../utilites.dart';
 import 'book.dart';
+import 'categoey/category.dart';
 
 final imgList = [
   "https://images.unsplash.com/photo-1501183007986-d0d080b147f9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8ZnJlZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
@@ -59,6 +61,36 @@ class _HomeState extends State<Home> {
                 }).toList(),
               ),
 
+              /// GET CATEGORIES
+              Card(
+                  elevation: 20,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+
+                      children: [
+                        Text(
+                          "التصنيفات ",
+                          style: kStyleTitle,
+                        ),
+                        SizedBox(
+                          height: 350,
+                          child:  FutureBuilder<List<CategoryModel>>(
+                            future: GetCategories(http.Client(),'https://api.afropolicy.com/api/web/v1/recipes/getcategories?access-token=test'),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) print(snapshot.error);
+
+                              return snapshot.hasData
+                                  ?               Category(categories:snapshot.data)
+
+                                  : Center(child: CircularProgressIndicator());
+                            },
+                          ),
+
+                        )
+                      ],
+                    ),
+                  )),
               /// Similar books
               Card(
                   elevation: 20,
