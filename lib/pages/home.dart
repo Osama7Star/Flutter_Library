@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_library/Services/BookModel.dart';
 import 'package:flutter_library/pages/widgets/bookcard.dart';
+import 'package:http/http.dart' as http;
 
 import '../main.dart';
 import '../utilites.dart';
@@ -57,7 +59,7 @@ class _HomeState extends State<Home> {
                 }).toList(),
               ),
 
-              /// Similar book
+              /// Similar books
               Card(
                   elevation: 20,
                   child: Padding(
@@ -70,7 +72,18 @@ class _HomeState extends State<Home> {
                           style: kStyleTitle,
                         ),
                         SizedBox(
-                          height: 400,
+                          height: 350,
+                          child:  FutureBuilder<List<Photo>>(
+                            future: FetchBook(http.Client(),'https://api.afropolicy.com/api/web/v1/recipes/getcategorybook?access-token=test&categoryid=22'),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) print(snapshot.error);
+
+                              return snapshot.hasData
+                                  ?               BookCard(photos:snapshot.data)
+
+                                  : Center(child: CircularProgressIndicator());
+                            },
+                          ),
 
                         )
                       ],

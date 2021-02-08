@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_library/Services/BookModel.dart';
+import 'package:flutter_library/pages/widgets/bookcard.dart';
 
 import '../main.dart';
 import '../utilites.dart';
+import 'package:http/http.dart' as http;
 
 class Search extends StatefulWidget {
   @override
@@ -24,30 +27,33 @@ class _SearchState extends State<Search> {
             child: TextField(
               controller: myController,
               decoration: new InputDecoration(
-                  border: new OutlineInputBorder(
-                      borderSide: new BorderSide(color: mainColor)),
-                  hintText: 'Tell us about yourself',
-
-                  suffixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.green,
-                  ),
-                 ),
+                border: new OutlineInputBorder(
+                    borderSide: new BorderSide(color: mainColor)),
+                hintText: 'Tell us about yourself',
+                suffixIcon: const Icon(
+                  Icons.search,
+                  color: Colors.green,
+                ),
+              ),
             ),
           ),
           RaisedButton(
             child: Text('Click'),
             onPressed: () {
-              return showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    // Retrieve the text the that user has entered by using the
-                    // TextEditingController.
-                    content: Text(myController.text),
-                  );
+              print('TestSearch');
+
+              FutureBuilder<List<Photo>>(
+                future: FetchBook(http.Client(),
+                    'https://api.afropolicy.com/api/web/v1/recipes/getcategorybook?access-token=test&categoryid=22'),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) print(snapshot.error);
+
+                  return snapshot.hasData
+                      ? Text('test')
+                      : Center(child: CircularProgressIndicator());
                 },
               );
+
             },
           )
         ],

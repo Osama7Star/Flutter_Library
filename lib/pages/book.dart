@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_library/Services/BookModel.dart';
-import 'package:flutter_library/pages/widgets/AppBar.dart';
+import 'package:flutter_library/Services/ReviewBook.dart';
+
 import 'package:flutter_library/pages/widgets/UserReviews.dart';
 import 'package:flutter_library/pages/widgets/bookcard.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
+
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../main.dart';
@@ -53,8 +53,31 @@ class _bookState extends State<book> {
                 },
               ),
 
+
+              /// GET BOOK REVIEWS
+
+              Padding(
+                padding: const EdgeInsets.only(top:15.0),
+                child: Text('Book Reviews', style: kStyleTitle.copyWith(fontSize: 25,color:mainColor),),
+              ),
+              FutureBuilder<List<ReviewBook>>(
+                future: getReview(http.Client(),'https://api.afropolicy.com/api/web/v1/recipes/getbookreview?access-token=test&bookId=36'),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) print(snapshot.error);
+
+                  return snapshot.hasData
+                      ?               BookReviews(bookReview:snapshot.data)
+
+                      : Center(child: CircularProgressIndicator());
+                },
+              ),
+
               /// GET SIMILAR BOOKS
 
+              Padding(
+                padding: const EdgeInsets.only(top:15.0),
+                child: Text('Similr Book', style: kStyleTitle.copyWith(fontSize: 25,color:mainColor),),
+              ),
               FutureBuilder<List<Photo>>(
                 future: FetchBook(http.Client(),'https://api.afropolicy.com/api/web/v1/recipes/getcategorybook?access-token=test&categoryid=22'),
                 builder: (context, snapshot) {
@@ -74,6 +97,7 @@ class _bookState extends State<book> {
       ),
     );
   }
+
 }
 
 class BookInfo extends StatelessWidget {

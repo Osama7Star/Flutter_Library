@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_library/pages/Search.dart';
-import 'package:flutter_library/pages/author/author.dart';
-import 'package:flutter_library/pages/book.dart';
-import 'package:flutter_library/pages/categoey/category.dart';
 import 'package:flutter_library/pages/home.dart';
-import 'package:flutter_library/pages/widgets/AppBar.dart';
 
 void main() => runApp(App());
 
@@ -15,7 +11,7 @@ class App extends StatelessWidget {
         title: 'Title1',
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => book(),
+          '/': (context) => Home(),
           '/search': (context) => Search(),
         });
   }
@@ -31,6 +27,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
+
+/// AppBar
 class CoustomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   String userName;
 

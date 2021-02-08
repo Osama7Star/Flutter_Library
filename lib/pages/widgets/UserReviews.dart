@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_library/Services/ReviewBook.dart';
 
 import '../../utilites.dart';
-class UserReview extends StatelessWidget {
-  String imageUrl;
-  String fullName;
-  String userName;
-  String review ;
+class BookReviews extends StatelessWidget {
+  final List<ReviewBook> bookReview;
 
-  UserReview({this.fullName,this.userName,this.imageUrl,this.review});
+  const BookReviews({Key key, this.bookReview}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -30,9 +30,9 @@ class UserReview extends StatelessWidget {
                child: Column(
 
                  children: [
-                   Text(fullName,style: kStyleTitle.copyWith(fontSize: 15),),
+                   Text('fullName',style: kStyleTitle.copyWith(fontSize: 15),),
                    SizedBox(height: 3),
-                   Text('@ $userName')
+                   Text('@ ''')
                  ],
                ),
              )
@@ -41,7 +41,7 @@ class UserReview extends StatelessWidget {
         /// review writter bu user
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(review,style: kStyleTitle.copyWith(fontSize: 18),),
+            child: Text('review',style: kStyleTitle.copyWith(fontSize: 18),),
           ),
           //date
           Container(
