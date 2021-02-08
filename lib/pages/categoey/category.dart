@@ -14,11 +14,11 @@ class Category extends StatelessWidget {
       child: Container(
 
           child:SizedBox(
-            height: 300,
-            width: 500,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
 
+            child: GridView.builder(
+              scrollDirection: Axis.horizontal,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: ( 2 )),
               itemCount: categories.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
@@ -37,9 +37,7 @@ class Category extends StatelessWidget {
                     elevation: 10,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-               child: category(name:'test'),
-                    ),
+                      child: category(name:categories[index].name),
                   ),
                   ),
                 );
@@ -59,16 +57,13 @@ class category extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
+    return Card(
 
-        color: mainColor,
-        elevation: 20,
-          child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(name,          textAlign: TextAlign.center,
-                  style: kStyleTitle.copyWith(color: Colors.white70,letterSpacing: 2),),)),
-    );
+      color: mainColor,
+      elevation: 20,
+        child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(name,          textAlign: TextAlign.center,
+                style: kStyleTitle.copyWith(color: Colors.white70,letterSpacing: 2),),));
   }
 }

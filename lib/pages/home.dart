@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
                           style: kStyleTitle,
                         ),
                         SizedBox(
-                          height: 350,
+                          height: 150,
                           child:  FutureBuilder<List<CategoryModel>>(
                             future: GetCategories(http.Client(),'https://api.afropolicy.com/api/web/v1/recipes/getcategories?access-token=test'),
                             builder: (context, snapshot) {
