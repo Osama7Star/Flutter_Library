@@ -17,9 +17,13 @@ class Category extends StatelessWidget {
 
             child: GridView.builder(
               scrollDirection: Axis.horizontal,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: ( 2 )),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 3 / 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20),
               itemCount: categories.length,
+
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: (){
@@ -57,13 +61,15 @@ class category extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return SizedBox(
+      child: Card(
 
-      color: mainColor,
-      elevation: 20,
-        child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Text(name,          textAlign: TextAlign.center,
-                style: kStyleTitle.copyWith(color: Colors.white70,letterSpacing: 2),),));
+        color: mainColor,
+        elevation: 20,
+          child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(name,          textAlign: TextAlign.center,
+                  style: kStyleTitle.copyWith(color: Colors.white70,letterSpacing: 2),),)),
+    );
   }
 }

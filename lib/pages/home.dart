@@ -74,7 +74,8 @@ class _HomeState extends State<Home> {
                           style: kStyleTitle,
                         ),
                         SizedBox(
-                          height: 150,
+                          width: 1000,
+                          height: 500,
                           child:  FutureBuilder<List<CategoryModel>>(
                             future: GetCategories(http.Client(),'https://api.afropolicy.com/api/web/v1/recipes/getcategories?access-token=test'),
                             builder: (context, snapshot) {
@@ -91,7 +92,67 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   )),
-              /// Similar books
+              /// Similar books 1
+              Card(
+                  elevation: 20,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+
+                      children: [
+                        Text(
+                          "Similar Book ",
+                          style: kStyleTitle,
+                        ),
+                        SizedBox(
+                          height: 350,
+                          child:  FutureBuilder<List<Photo>>(
+                            future: FetchBook(http.Client(),'https://api.afropolicy.com/api/web/v1/recipes/getcategorybook?access-token=test&categoryid=22'),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) print(snapshot.error);
+
+                              return snapshot.hasData
+                                  ?               BookCard(photos:snapshot.data)
+
+                                  : Center(child: CircularProgressIndicator());
+                            },
+                          ),
+
+                        )
+                      ],
+                    ),
+                  )),
+              /// Similar books 2
+              Card(
+                  elevation: 20,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+
+                      children: [
+                        Text(
+                          "Similar Book ",
+                          style: kStyleTitle,
+                        ),
+                        SizedBox(
+                          height: 350,
+                          child:  FutureBuilder<List<Photo>>(
+                            future: FetchBook(http.Client(),'https://api.afropolicy.com/api/web/v1/recipes/getcategorybook?access-token=test&categoryid=22'),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) print(snapshot.error);
+
+                              return snapshot.hasData
+                                  ?               BookCard(photos:snapshot.data)
+
+                                  : Center(child: CircularProgressIndicator());
+                            },
+                          ),
+
+                        )
+                      ],
+                    ),
+                  )),
+              /// Similar books 3
               Card(
                   elevation: 20,
                   child: Padding(

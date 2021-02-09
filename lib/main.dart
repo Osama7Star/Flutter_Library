@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_library/pages/Search.dart';
+import 'package:flutter_library/pages/SuggestBook.dart';
+import 'package:flutter_library/pages/book.dart';
 import 'package:flutter_library/pages/home.dart';
 
 void main() => runApp(App());
@@ -43,11 +45,19 @@ class CoustomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       Navigator.of(context).pushNamed('/search');
 
     }
+
       ),
-      Padding(
-        padding: const EdgeInsets.only(right: 10),
-        child: Icon(Icons.add),
-      )
+      IconButton(
+          icon: Icon(Icons.add),
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SuggestBook(),
+                ));
+
+          }
+      ),
     ]);
   }
 
