@@ -25,7 +25,7 @@ class SuggestBook extends StatelessWidget {
                             if(validateEmail(value))
                              return null;
                             else
-                              return 'Email is not true ';
+                              return 'Email is not true  ';
                           }
 
                           return 'Please enter some text';
