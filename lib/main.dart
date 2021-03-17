@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_library/pages/Search.dart';
 import 'package:flutter_library/pages/SuggestBook.dart';
-import 'package:flutter_library/pages/book.dart';
 import 'package:flutter_library/pages/home.dart';
 
 void main() => runApp(App());
@@ -29,7 +28,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-
 /// AppBar
 class CoustomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   String userName;
@@ -40,24 +38,19 @@ class CoustomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(title: Text(userName), actions: [
       IconButton(
-    icon: Icon(Icons.search),
-    onPressed: (){
-      Navigator.of(context).pushNamed('/search');
-
-    }
-
-      ),
+          icon: Icon(Icons.search),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/search');
+          }),
       IconButton(
           icon: Icon(Icons.add),
-          onPressed: (){
+          onPressed: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => SuggestBook(),
                 ));
-
-          }
-      ),
+          }),
     ]);
   }
 
